@@ -28,7 +28,7 @@ function [ tabl, B, L ] = extractmeasure( input_image )
 %   plot(boundary(:,2), boundary(:,1), 'k', 'LineWidth', 2)
 % end
 stats=regionprops(L,'Area','Centroid','Perimeter','MajorAxisLength','MinorAxisLength','EquivDiameter','Perimeter');
-tabl=struct2table(stats)
+tabl=struct2table(stats);
 % tabl.Properties.Rownames=rownames
 % threshold=0.94;
 

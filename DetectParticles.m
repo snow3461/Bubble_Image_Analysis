@@ -5,7 +5,7 @@ im=imread(filename);
 
 %% treat image
 
-imt=imgtreatment(im,5);
+imt=imgtreatment(im,30);
 
 %% extract measurements
 

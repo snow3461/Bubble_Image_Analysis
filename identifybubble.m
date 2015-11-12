@@ -13,8 +13,8 @@ if isempty(data);
     return; % exist function
 end
 if isempty(tabl)
-     msg='No object detected in this image';
-    error(msg,num);
+    msg='No object detected in this image';
+    error(msg);
     return;
 end
 
@@ -51,5 +51,5 @@ end
 
 
 
-% if result return 0,  must handle taht as well (not previously found
+% if result return 0,  must handle that as well (not previously found
 % bubble, surely artefacts
