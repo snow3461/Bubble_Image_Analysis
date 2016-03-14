@@ -32,7 +32,7 @@ for i=1:numel(data)
     origin=data{i}.Centroid(end,:); % take centroid coordinates of end of results table, aka last coordinate of centroid of each bubble
     dist=sqrt(sum([read(:,1)-origin(1,1) read(:,2)-origin(1,2)].^2,2));% take square root distance from centroid as indicator, give a vector of distance. the min is the bubble less far from the origin.
     [~,minindex]= min(dist);%min index give index of the bubble that correspond to entry i in data array
-    result(minindex)=i; %attribuate the bubble number to the 'read' table
+    result(minindex)=i; %attribuate the bubble number
 end
 
 for i=1:height(tabl)

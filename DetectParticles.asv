@@ -10,18 +10,15 @@ imt=imgtreatment(im,30);
 %% extract measurements
 
 [Particle, ~, L] = extractmeasure(imt);
-
+[folder,name,~] = fileparts(filename);%retrive folder name
+mkdir(folder, 'Processed_images');%create a new folder in this folder
 
 %% compose label image and original RGB image
-create_composition_image(im,L,filename);
-% replaced by function.deleting of following if that works.
-
-% [folder,name,~] = fileparts(filename);%retrive folder name
-% mkdir(folder, 'Processed_images');%create a new folder in this folder
-
+create_composition_image(im,L,folder);
+% replaced by function.try an
 %mask=label2rgb(L,@jet,'k');
-% %following portion is to make basic composition, no blending...before
-% %%finding custom imfuse function
+%following portion is to make basic composition, no blending...before
+%%finding custom imfuse function
 %
 % sel=(L>0);
 % processed=uint8(zeros(size(im)));

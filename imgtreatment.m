@@ -1,9 +1,10 @@
 function [ output_image ] = imgtreatment( input_image, size )
 %imgtreatment Convert images to gray, threshold it, remove small particules
 
+% input_image=illumination_correction(input_image);
 im=rgb2gray(input_image);%convert to grayscale
 % imshow(im)
-% im=imadjust(im);
+im=imadjust(im);
 % imshowpair(im,im_adjust,'montage');
 
 multilevel=multithresh(im,2);% multilevel thresholding using otsu method

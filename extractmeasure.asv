@@ -35,6 +35,7 @@ for i=1:numel(stats)
     stats(i).AspectRatio= stats(i).MajorAxisLength/stats(i).MinorAxisLength;
     stats(i).Roundness= 4*stats(i).Area/(pi*stats(i).MajorAxisLength^2);
     stats(i).Solidity = stats(i).Area/stats(i).ConvexArea;
+    
 end
 
 

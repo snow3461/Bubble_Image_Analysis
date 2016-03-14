@@ -1,4 +1,4 @@
-function [ output_image ] = imgtreatment2( input_image )
+function [ output_image ] = imgtreatment_preview( input_image )
 %imgtreatment Convert images to gray, threshold it, remove small particules
 
 % input_image=illumination_correction(input_image);
@@ -7,7 +7,7 @@ im=rgb2gray(input_image);%convert to grayscale
 im=imadjust(im);
 % imshowpair(im,im_adjust,'montage');
 
-multilevel=multithresh(im,8);% multilevel thresholding using otsu method
+multilevel=multithresh(im,2);% multilevel thresholding using otsu method
 newlevel=min(multilevel); % we want only the darkest one
 BW=imquantize(im,newlevel);% actual segmentation of the image
 BW=im2bw(BW,[0 0 0; 1 1 1]); % convert to binrary (logical image) using a color map [0 0 0; 1 1 1]

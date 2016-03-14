@@ -3,7 +3,7 @@ clear all;
 close all;
 
 %% set up folder containing images
-folder_name=uigetdir('E:\Thèse_INSA\Experiences\','Choose a folder to process');
+folder_name=uigetdir('D:\Thèse_INSA\Experiences\','Choose a folder to process');
 if folder_name==0
     msg='No folder selected, I quit';
     error(msg);
@@ -37,7 +37,11 @@ timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'})
 
 
 %% run analysis algorythm
+h= waitbar(0,[num2str(1) ' / ' num2str(nimages)],'Name','Analysing images, computing segmentation and region props...');
 for k=1:nimages
+    
+    
+    
     tabl = DetectParticles(fullpath{k});
     
     if ~isempty(tabl)% if resulting table is not empty, do this
@@ -53,8 +57,9 @@ for k=1:nimages
         data = identifybubble( data, tabl );
         
     end
+    waitbar(k/nimages,h,[num2str(k) ' / ' num2str(nimages)]);
 end
-
+close(h)
 %% apply scaling
 data=apply_scaling(data);
 
@@ -66,3 +71,6 @@ fullpath=strcat(Pathname,Filenames);
 for i=1:numel(data)
    writetable(data{i},fullpath,'Filetype','spreadsheet','Sheet',i);
 end
+
+clear all;
+close all;
