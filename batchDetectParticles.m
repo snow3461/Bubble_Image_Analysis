@@ -12,11 +12,6 @@ nImages=length(fileNames)
 data={};
 parfor (k = 1:nImages)    
 
-   table = fcn(fileNames{k});     %#ok<PFBNS> % 'fcn' is not an array but a function handle. The Code Analyzer warning is not relevant here.  
+   data{k} = fcn(fileNames{k});     %#ok<PFBNS> % 'fcn' is not an array but a function handle. The Code Analyzer warning is not relevant here.  
     
-   
-   %% identify buuble and tie measure to results table
-
-data = identifybubble( data, table ) % may need to be outside of this function, in batchDetectParticles for example
-   
 end
