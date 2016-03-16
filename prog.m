@@ -17,7 +17,6 @@ fullpath=(fullfile(folder_name,filesep,filenames))';
 
 %% initiliaze some variables
 nimages=length(fullpath);
-data={};%initialise data array
 
 %% promt intervall
 prompt = {'Enter the intervall in seconds between images'};
@@ -33,33 +32,15 @@ if isempty(answer)
 end     
 time_interval=str2num(answer{1});% intervall between images in second
 
-timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'});
+timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'}); %table with coressponding time to each images
 
+%% trying to use parallel box
+pool=parpool;
+tablearray=batchDetectParticles(fullpath,@DetectParticles);
+delete(pool);
+tablearray=populate_timepoint(tablearray,timetbl)
+data=identifybubble(tablearray)
 
-%% run analysis algorythm
-h= waitbar(0,[num2str(1) ' / ' num2str(nimages)],'Name','Analysing images, computing segmentation and region props...');
-for k=1:nimages
-    
-    
-    
-    tabl = DetectParticles(fullpath{k});
-    
-    if ~isempty(tabl)% if resulting table is not empty, do this
-        
-        timepoint=timetbl(k,:);% populate the timepoint
-        while height(timepoint)< height(tabl) % if several buubles, need the same timepoint for all of them...
-            timepoint=[timepoint ; timepoint(1,:)]; % so append the time point as necessary
-        end
-        tabl=[timepoint, tabl];
-        
-        %% identify bubble and tie measure to results table
-        
-        data = identifybubble( data, tabl );
-        
-    end
-    waitbar(k/nimages,h,[num2str(k) ' / ' num2str(nimages)]);
-end
-close(h)
 %% apply scaling
 data=apply_scaling(data);
 
