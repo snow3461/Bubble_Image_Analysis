@@ -13,5 +13,5 @@ data={};
 parfor (k = 1:nImages)    
 
    data{k} = fcn(fileNames{k});     %#ok<PFBNS> % 'fcn' is not an array but a function handle. The Code Analyzer warning is not relevant here.  
-    
+
 end
