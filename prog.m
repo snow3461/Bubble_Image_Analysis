@@ -10,7 +10,7 @@ if folder_name==0
     return;
 end
 
-y=dir(fullfile(folder_name,'*.png'));
+y=dir(fullfile(folder_name,'*.tif'));
 y=y(find(~cellfun(@(isdir) isdir==1,{y(:).isdir}))); %remove every folder from list
 filenames={y.name};
 fullpath=(fullfile(folder_name,filesep,filenames))';
@@ -38,8 +38,8 @@ timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'})
 pool=parpool;
 tablearray=batchDetectParticles(fullpath,@DetectParticles);
 delete(pool);
-tablearray=populate_timepoint(tablearray,timetbl)
-data=identifybubble(tablearray)
+tablearray=populate_timepoint(tablearray,timetbl);
+data=identifybubble(tablearray);
 
 %% apply scaling
 data=apply_scaling(data);

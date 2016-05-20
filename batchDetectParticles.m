@@ -8,7 +8,7 @@ function data = batchDetectParticles(fileNames,fcn)
 %   Supports batch processing example, BatchProcessImageExample.
 
 %   Copyright 2007-2013 The MathWorks, Inc.
-nImages=length(fileNames)
+nImages=length(fileNames);
 data={};
 parfor (k = 1:nImages)    
 
