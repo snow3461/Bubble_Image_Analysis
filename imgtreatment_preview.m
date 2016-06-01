@@ -20,7 +20,7 @@ BW=imcomplement(BW); %inverse color
 % imshow(BW)
 
 %remove small element
-se=strel('disk',30);
+se=strel('disk',15);
 BW1=imopen(BW,se);% equivalent to bwmorph(input_image,'open')
 imt=imfill(BW1,'holes');% fills holes
 % imshow(imt)
@@ -45,7 +45,7 @@ for k=1:1:3 % 1 is red, 2 is green, 3 is blue
     processed(:,:,k)=ai;
 end
 output_image =imfuse_custom(im,processed,'blend'); % blending with modified image to keep intensity in rest of image
-
+% output_image=imt;
 % 
 % figure;
 % imshowpair(input_image,output_image,'montage');
