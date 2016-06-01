@@ -10,7 +10,7 @@ if folder_name==0
     return;
 end
 
-y=dir(fullfile(folder_name,'*.tif'));
+y=dir(fullfile(folder_name,'*.jpg'));
 y=y(find(~cellfun(@(isdir) isdir==1,{y(:).isdir}))); %remove every folder from list
 filenames={y.name};
 fullpath=(fullfile(folder_name,filesep,filenames))';
@@ -34,10 +34,14 @@ time_interval=str2num(answer{1});% intervall between images in second
 
 timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'}); %table with coressponding time to each images
 
+
 %% trying to use parallel box
-pool=parpool;
+p=gcp('nocreate');%check if a pool is available
+if isempty(p)%if no pool, create one
+pool=parpool(4);%4 workers for an quad-core CPU
+end
 tablearray=batchDetectParticles(fullpath,@DetectParticles);
-delete(pool);
+%delete(pool);%optionnaly shut down the pool
 tablearray=populate_timepoint(tablearray,timetbl);
 data=identifybubble(tablearray);
 

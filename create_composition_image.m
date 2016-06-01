@@ -4,8 +4,11 @@ function [] = create_composition_image(im,L,filename)
 
 
 [folder,name,~] = fileparts(filename);%retrive folder name
-mkdir(folder, 'Processed_images');%create a new folder in this folder
 
+testdir=strcat(folder,'\Processed_images');
+if ~(exist(testdir,'dir')==7)
+mkdir(folder, 'Processed_images');%create a new folder in this folder
+end
 
 %compose label image and original RGB image
 mask=label2rgb(L,@jet,'k');
