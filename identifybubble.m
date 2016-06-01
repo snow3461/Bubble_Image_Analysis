@@ -26,14 +26,16 @@ for k=1:length(data_array)
     %%table in data cell arrays
     
     read=data_array{k}.Centroid; %read matrix of centroids
+    roundness=data_array{k}.Roundness;
     result=zeros(size(read(:,2)));% create result vector
     
     
     %% identify bubble by proximity of centroids coordinates
     for i=1:numel(data_table)
         origin=data_table{i}.Centroid(end,:); % take centroid coordinates of end of results table
-        dist=sqrt(sum([read(:,1)-origin(1,1) read(:,2)-origin(1,2)].^2,2));% take
-        [~,minindex]= min(dist);%min index give index
+        dist=sqrt(sum([read(:,1)-origin(1,1) read(:,2)-origin(1,2)].^2,2));% compute square root distance
+        [M,minindex]= min(dist);%min index give index
+        if roundness(minindex)> 0.88 && M < 700  %another condition is its a bubble, and its not too far from precedent one
         result(minindex)=i;
     end
     

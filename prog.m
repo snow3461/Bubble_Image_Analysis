@@ -56,6 +56,3 @@ fullpath=strcat(Pathname,Filenames);
 for i=1:numel(data)
    writetable(data{i},fullpath,'Filetype','spreadsheet','Sheet',i);
 end
-
-clear all;
-close all;
