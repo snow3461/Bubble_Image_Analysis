@@ -24,8 +24,9 @@ for k=1:1:3 % 1 is red, 2 is green, 3 is blue
     processed(:,:,k)=ai;
 end
 processed=imfuse_custom(im,processed,'blend'); % blending with modified image to keep intensity in rest of image
-writepath=fullfile(folder,'Processed_images',strcat(name,'_processed','.png'));
-imwrite(processed,writepath,'png');
+processed=imresize(processed,0.5,'bicubic');
+writepath=fullfile(folder,'Processed_images',strcat(name,'_processed','.jpg'));
+imwrite(processed,writepath,'jpg');
 
 end
 
