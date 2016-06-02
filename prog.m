@@ -10,7 +10,8 @@ if folder_name==0
     return;
 end
 
-y=dir(fullfile(folder_name,'*.jpg'));
+y=dir(fullfile(folder_name,'*.tif'));
+
 y=y(find(~cellfun(@(isdir) isdir==1,{y(:).isdir}))); %remove every folder from list
 filenames={y.name};
 fullpath=(fullfile(folder_name,filesep,filenames))';
@@ -40,7 +41,10 @@ p=gcp('nocreate');%check if a pool is available
 if isempty(p)%if no pool, create one
 pool=parpool(4);%4 workers for an quad-core CPU
 end
+t=progresstimer(nimages,folder_name);
+start(t);
 tablearray=batchDetectParticles(fullpath,@DetectParticles);
+stop(t);
 %delete(pool);%optionnaly shut down the pool
 tablearray=populate_timepoint(tablearray,timetbl);
 data=identifybubble(tablearray);
