@@ -37,6 +37,7 @@ for k=1:length(data_array)
         [M,minindex]= min(dist);%min index give index
         if roundness(minindex)> 0.88 && M < 700  %another condition is its a bubble, and its not too far from precedent one
         result(minindex)=i;
+        end
     end
     
     for i=1:height(data_array{k})
