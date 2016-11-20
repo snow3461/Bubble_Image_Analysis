@@ -10,14 +10,16 @@ if folder_name==0
     return;
 end
 
-y=dir(fullfile(folder_name,'*.tif'));
-
-y=y(find(~cellfun(@(isdir) isdir==1,{y(:).isdir}))); %remove every folder from list
+y=dir(folder_name)
+%need to handle .jpg, .png, or .tiff
+y=y(~[y.isdir]);%remove every folder form the list
+y=y(find(cellfun(@(str) ~isempty(regexp(str(end-2:end),'(jpg|png|tiff)', 'once')),{y(:).name})));%select only image file with png, jpg, or tiff extension
 filenames={y.name};
-fullpath=(fullfile(folder_name,filesep,filenames))';
+fullpaths=(fullfile(folder_name,filesep,filenames))';
+
 
 %% initiliaze some variables
-nimages=length(fullpath);
+nimages=length(fullpaths);
 
 %% promt intervall
 prompt = {'Enter the intervall in seconds between images'};
@@ -36,7 +38,7 @@ time_interval=str2num(answer{1});% intervall between images in second
 timetbl=table([0:time_interval:time_interval*nimages]','VariableNames',{'Time'}); %table with coressponding time to each images
 
 
-%% trying to use parallel box
+%% trying to use parallel toolbox
 p=gcp('nocreate');%check if a pool is available
 if isempty(p)%if no pool, create one
 pool=parpool(4);%4 workers for an quad-core CPU
