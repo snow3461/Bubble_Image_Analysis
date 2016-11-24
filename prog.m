@@ -45,7 +45,7 @@ pool=parpool(4);%4 workers for an quad-core CPU
 end
 t=progresstimer(nimages,folder_name);
 start(t);
-tablearray=batchDetectParticles(fullpath,@DetectParticles);
+tablearray=batchDetectParticles(fullpaths,@DetectParticles);
 stop(t);
 %delete(pool);%optionnaly shut down the pool
 tablearray=populate_timepoint(tablearray,timetbl);
@@ -58,7 +58,7 @@ data=apply_scaling(data);
 
 FilterSpec = {'*.xls', 'Excel Spreadsheet (*.xls)'}; %set the filter for the next ui dialog that allows to select files !
 [Filenames, Pathname, FilterIndex] = uiputfile(FilterSpec,'Save to',folder_name); %open ui dialog to select files and store filenames and path....
-fullpath=strcat(Pathname,Filenames);
+fullpaths=strcat(Pathname,Filenames);
 for i=1:numel(data)
-   writetable(data{i},fullpath,'Filetype','spreadsheet','Sheet',i);
+   writetable(data{i},fullpaths,'Filetype','spreadsheet','Sheet',i);
 end
