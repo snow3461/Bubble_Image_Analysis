@@ -29,7 +29,7 @@ function [ tabl, B, L ] = extractmeasure( input_image )
 % end
 stats=regionprops(L,'Area','Centroid','Perimeter','MajorAxisLength','MinorAxisLength','EquivDiameter','Perimeter','ConvexArea');
 
-%% compute some caracteristics
+%% compute some more caracteristics
 for i=1:numel(stats)
     stats(i).Circularity=4*pi*stats(i).Area/(stats(i).Perimeter^2);
     stats(i).AspectRatio= stats(i).MajorAxisLength/stats(i).MinorAxisLength;
