@@ -13,7 +13,7 @@ function bw=adaptivethreshold(IM,ws,tm)
 %  http://homepages.inf.ed.ac.uk/rbf/HIPR2/adpthrsh.htm
 
 if (nargin<2)
-    error('You must provide the image IM, the window size ws, and C.');
+    error('You must provide the image IM, and the window size ws');
 elseif (nargin==2)
     tm=0;
 elseif (tm~=0 && tm~=1)
@@ -25,9 +25,15 @@ IM=mat2gray(IM);
 if tm==0
     mIM=imfilter(IM,fspecial('average',ws),'replicate');
 else
-    mIM=medfilt2(IM,[ws ws]);
+    mIM=medfilt2(IM,[ws ws]);%carefull with windows size otherwise, stuck matlab
 end
 sIM=mIM-IM;
 thresh=graythresh(sIM);
 bw=im2bw(sIM,thresh);
 bw=imcomplement(bw);
+
+%% other possible implementation
+% im = rgb2gray(im);
+% im = im2double(im);
+% f_makebw = @(I) im2bw(I.data, double(median(I.data(:)))/1.45);
+% bw = ~blockproc(im, [128 128], f_makebw);
