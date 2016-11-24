@@ -1,4 +1,3 @@
-
 clear all;
 close all;
 
@@ -8,6 +7,7 @@ fullpaths=get_paths('D:\Thèse_INSA\Experiences\');
 timetbl=create_time_points(length(fullpaths));
 
 tablearray=parallel_treatment(fullpaths);%treat_images
+% tablearray=singlefile_treatment(fullpaths);
 
 tablearray=populate_timepoint(tablearray,timetbl);%add time correspondance
 
@@ -19,4 +19,4 @@ data=apply_scaling(data);
 
 %%save file
 
-save_results( data )
+save_results( fullpaths,data )

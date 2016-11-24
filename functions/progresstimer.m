@@ -26,7 +26,7 @@ t.UserData={folder_name};
         h=data{2};
         nproc=numel(dir(fullfile(folder_name,'Processed_images','*.jpg')));
         x=nproc/nimages;
-        waitbar(x,h);%update waitbar
+        waitbar(x,h,sprintf('%d/%d images processed, please wait....',nproc,nimages));%update waitbar
     end
 
     function TimerCleanup(mTimer,~)

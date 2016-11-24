@@ -29,11 +29,11 @@ end%if already grayscale, do nothing
 % BW=im2bw(BW,[0 0 0; 1 1 1]); % convert to binrary (logical image) using a color map [0 0 0; 1 1 1]
 
 %% adptative thresholding using custom function,carefull with windows size
-BW=adaptivethreshold(im,800);
+% BW=adaptivethreshold(im,800);
 
 %% adptative thresholding using bult-in matalb function
 % BW=adaptivethreshold(im,801);
-T=adaptthresh(im,0.5,'NeighborhoodSize',[57 57],'Statistic','mean','ForegroundPolarity','dark');
+T=adaptthresh(im,0.5,'NeighborhoodSize',[101 101],'Statistic','mean','ForegroundPolarity','dark');
 % imshow(T)
 BW = imbinarize(im,T);
 % figure;
