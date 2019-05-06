@@ -1,6 +1,6 @@
 function t = progresstimer(nimages,folder_name)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%progresstimer Create a custsom timer to show progress of treatment
+
 
 t = timer;
 t.StartFcn = @progressTimerStart;
@@ -33,19 +33,5 @@ t.UserData={folder_name};
         data=t.UserData;
         close(data{2});%close the waitbar
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
 

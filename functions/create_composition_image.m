@@ -1,13 +1,14 @@
 function [] = create_composition_image(im,L,filename)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%create_composition_image This function will create a composited image
+% from the original images and the detected object from the segmentation algorithm.
+% Used to evaluate visually the good detection of bondaries in the image.
 
 
 [folder,name,~] = fileparts(filename);%retrive folder name
 
-testdir=strcat(folder,'\Processed_images');
+testdir=strcat(folder,'\Processed_images'); %we will place the processed images in a separate folder
 if ~(exist(testdir,'dir')==7)
-mkdir(folder, 'Processed_images');%create a new folder in this folder
+mkdir(folder, 'Processed_images');%if not exist, create the folder
 end
 
 %compose label image and original RGB image
@@ -33,7 +34,7 @@ else
     end
 end
 processed=imfuse_custom(im,processed,'blend'); % blending with modified image to keep intensity in rest of image
-processed=imresize(processed,0.5,'bicubic');
+processed=imresize(processed,0.5,'bicubic'); % resize the composition file to take less disk space
 writepath=fullfile(folder,'Processed_images',strcat(name,'_processed','.jpg'));
 imwrite(processed,writepath,'jpg');
 

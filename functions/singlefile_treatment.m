@@ -1,6 +1,6 @@
 function [ data ] = singlefile_treatment(fullpaths)
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%singlefile_treatment Launch image analysis with parallel threading
+
 fileNames=fullpaths;
 nImages=length(fileNames);
 data={};

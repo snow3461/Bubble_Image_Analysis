@@ -6,16 +6,16 @@ fullpaths=get_paths('D:\Thèse_INSA\Experiences\');
 
 timetbl=create_time_points(length(fullpaths));
 
-% tablearray=singlefile_treatment(fullpaths);
+% tablearray=singlefile_treatment(fullpaths);::!!
 tablearray=parallel_treatment(fullpaths);%treat_images
 
-tablearray=populate_timepoint(tablearray,timetbl);%add time correspondance
+tablearray=populate_timepoint(tablearray,timetbl);%add time correspondance previously generated
 
 %% attribute to each bubbles
 data=identifybubble(tablearray);
 
 %% apply scaling
-data=apply_scaling(data);
+data = apply_scaling(data);
 
 %%save file
 

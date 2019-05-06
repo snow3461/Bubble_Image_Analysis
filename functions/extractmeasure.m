@@ -1,5 +1,5 @@
 function [ tabl, B, L ] = extractmeasure( input_image )
-%UNTITLED3 Summary of this function goes here
+%extractmeasure Function responsible of 
 %   Detailed explanation goes here
 
 %% extract connected object, label them, and count them
