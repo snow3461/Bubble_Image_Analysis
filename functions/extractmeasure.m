@@ -1,13 +1,10 @@
 function [ tabl, B, L ] = extractmeasure( input_image )
-%extractmeasure Function responsible of 
-%   Detailed explanation goes here
+%extractmeasure Function responsible of extracting features
+% Will return a table with the measurements we are interested in, as well
+% as bondaries pixel locations (B), and label matrix (L).
 
 %% extract connected object, label them, and count them
-[B,L,N,~] = bwboundaries(input_image);
-% if num > 1
-%     msg='There is %d objects detected, that is more than one and this program can not handle it yet,sorry'
-% error(msg,num)
-% end
+[B,L] = bwboundaries(input_image);
 
 %% create row label
 % rownames=[];
@@ -16,9 +13,6 @@ function [ tabl, B, L ] = extractmeasure( input_image )
 %     indice={num2str(i)};
 %     rownames=[rownames; strcat(template,indice)];
 % end
-
-
-
 
 %% Display the label matrix and draw each boundary
 % lab=imshow(label2rgb(L, @jet, [.5 .5 .5]))% optional, for debugging purpose only
@@ -38,7 +32,7 @@ for i=1:numel(stats)
 end
 
 
-%convert to table
+%%convert to table
 tabl=struct2table(stats);
 % tabl.Properties.Rownames=rownames
 % threshold=0.94;

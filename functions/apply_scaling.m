@@ -37,7 +37,9 @@ function [ data ] = apply_scaling( data )
             'Visible','off');%create a text input field for custom option, but set it invisible
         align([handles.txt handles.pop handles.input handles.push],'Center','Distribute');%align all elements
         guidata(dlg,handles);%save gui data
-        
+        uiwait(dlg);
+        close(dlg)
+        scaling_factor=handles.scaling_factor;%return value for function
         %% Callback function for the popoup selector
         function pop_callback(hObject,eventdata)
             handles=guidata(gcbo);%retrieve handles structure, and data
@@ -62,8 +64,8 @@ function [ data ] = apply_scaling( data )
                 case 3
                     handles.scaling_factor=50;%need to replace with proper value
                 case 4
-                    if (handles.pop.Value==4 && (~isempty(handles.input.String) || numel(handles.inout.String)~=1))% if custom option selected
-                        handles.scaling_factor=str2num(handles.input.String);%convert to num and save to gui data structure
+                    if (handles.pop.Value==4 && ~isempty(handles.input.String) && numel(str2num(handles.input.String))==1)% if custom option selected
+                        handles.scaling_factor=str2double(handles.input.String);%convert to num and save to gui data structure
                     else
                         msgbox('You need to enter a valid number');
                         return;
@@ -74,10 +76,7 @@ function [ data ] = apply_scaling( data )
             guidata(gcbo,handles);%save handles structure
             uiresume(dlg);
         end
-        %%
-        uiwait(dlg);
-        close(dlg)
-        scaling_factor=handles.scaling_factor;%return value for function
+        
         
     end
     

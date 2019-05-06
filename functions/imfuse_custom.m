@@ -161,7 +161,8 @@ end
         onlyB = ~A_mask & B_mask;
         bothAandB = A_mask & B_mask;
         
-        % weight each differently
+        % weight each differently (modified from original imfuse function
+        % in matlab)
         weight1 = 0.7;
         weight2 = 0.3;
         

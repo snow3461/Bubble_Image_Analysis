@@ -2,12 +2,12 @@ clear all;
 close all;
 
 addpath('functions');%add the functions directory to the path for this session only.
-fullpaths=get_paths('D:\Thèse_INSA\Experiences\');
+fullpaths=get_paths('D:\Thèse_INSA\Experiences\Matlab_Programs\Image_Analysis');
 
 timetbl=create_time_points(length(fullpaths));
 
-% tablearray=singlefile_treatment(fullpaths);::!!
-tablearray=parallel_treatment(fullpaths);%treat_images
+tablearray=singlefile_treatment(fullpaths);
+% tablearray=parallel_treatment(fullpaths);%treat_images
 
 tablearray=populate_timepoint(tablearray,timetbl);%add time correspondance previously generated
 
